@@ -1,7 +1,6 @@
 # My App
 
-A simple static webpage used to practice Git fundamentals as part of the
-ShellKode CI/CD training task sheet.
+A simple static webpage used to practice Git fundamentals as part of the CI/CD training task sheet.
 
 ## What this covers
 - Git installation & config
