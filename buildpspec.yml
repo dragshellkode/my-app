@@ -1,0 +1,11 @@
+version: 0.2
+phases:
+  install:
+    commands:
+      - echo Install phase - nothing to install for static site
+  build:
+    commands:
+      - echo Build phase - packaging files
+artifacts:
+  files:
+    - '**/*'
