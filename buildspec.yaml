@@ -10,7 +10,7 @@ phases:
   post_build:
     commands:
       - docker push 398915901665.dkr.ecr.ap-south-2.amazonaws.com/my-app:latest
-      - printf '[{"name":"my-app","imageUri":"%s"}]' 398915901665.dkr.ecr.ap-south-2.amazonaws.com/my-app:latest > imagedefinitions.json
+      - printf '[{"name":"Main","imageUri":"%s"}]' 398915901665.dkr.ecr.ap-south-2.amazonaws.com/my-app:latest > imagedefinitions.json
 artifacts:
   files:
     - imagedefinitions.json
