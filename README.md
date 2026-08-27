@@ -46,3 +46,9 @@ builds, container deployment on ECS, and container deployment on EKS.
 | `service.yaml` | Kubernetes Service spec (EKS, LoadBalancer) |
 
 ## Pipeline Flow
+GitHub push → CodePipeline (Source) → CodeBuild (Build & Push to ECR)
+→ Deploy to ECS (Fargate service)
+→ Deploy to EKS (kubectl rollout)
+
+## Author
+Mohanakrishnan A G
