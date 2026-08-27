@@ -1,15 +1,19 @@
 version: 0.2
+
 phases:
   pre_build:
     commands:
+      - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region ap-south-2 | docker login --username AWS --password-stdin 398915901665.dkr.ecr.ap-south-2.amazonaws.com
-      - aws eks update-kubeconfig --name sk-learn-cluster --region ap-south-2
+
   build:
     commands:
+      - echo Building Docker image...
       - docker build -t my-app .
       - docker tag my-app:latest 398915901665.dkr.ecr.ap-south-2.amazonaws.com/my-app:latest
-      - docker push 398915901665.dkr.ecr.ap-south-2.amazonaws.com/my-app:latest
+
   post_build:
     commands:
-      - kubectl set image deployment/my-app my-app=398915901665.dkr.ecr.ap-south-2.amazonaws.com/my-app:latest
-      - kubectl rollout status deployment/my-app
+      - echo Pushing Docker image to Amazon ECR...
+      - docker push 398915901665.dkr.ecr.ap-south-2.amazonaws.com/my-app:latest
+      - echo Docker image pushed successfully.
