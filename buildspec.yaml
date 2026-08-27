@@ -1,11 +1,16 @@
 version: 0.2
 phases:
-  install:
+  pre_build:
     commands:
-      - echo Install phase - nothing to install for static site
+      - aws ecr get-login-password --region ap-south-2 | docker login --username AWS --password-stdin 398915901665.dkr.ecr.ap-south-2.amazonaws.com
   build:
     commands:
-      - echo Build phase - packaging files
+      - docker build -t my-app .
+      - docker tag my-app:latest 398915901665.dkr.ecr.ap-south-2.amazonaws.com/my-app:latest
+  post_build:
+    commands:
+      - docker push 398915901665.dkr.ecr.ap-south-2.amazonaws.com/my-app:latest
+      - printf '[{"name":"my-app","imageUri":"%s"}]' 398915901665.dkr.ecr.ap-south-2.amazonaws.com/my-app:latest > imagedefinitions.json
 artifacts:
   files:
-    - '**/*'
+    - imagedefinitions.json
